@@ -4,12 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Kesh 💌</title>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
   <style>
     * {
       box-sizing: border-box;
@@ -44,6 +38,14 @@
 
     .screen.active {
       display: block;
+    }
+
+    img.gif {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 20px;
     }
 
     h2 {
@@ -83,139 +85,6 @@
       box-shadow: inset 0 0 8px rgba(0,0,0,0.03);
     }
 
-    /* Automated Forgiveness Meter Styles */
-    .meter-card-inner {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 1rem 0.5rem;
-      text-align: center;
-    }
-
-    .sub-tag {
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #777;
-      margin-bottom: 0.5rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .meter-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #2b1e1e;
-      margin-bottom: 0.8rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .meter-description {
-      font-size: 0.85rem;
-      color: #666;
-      line-height: 1.5;
-      margin-bottom: 1.5rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .percentage-display {
-      font-size: 3.5rem;
-      font-weight: 700;
-      color: #2b1e1e;
-      margin-bottom: 0.8rem;
-      min-height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .status-text {
-      font-size: 0.85rem;
-      color: #888;
-      margin-bottom: 1.5rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .error-banner {
-      display: inline-block;
-      background-color: #fce8e6;
-      color: #d90429;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      padding: 8px 16px;
-      border-radius: 20px;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .broken-section {
-      display: none;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.5s ease;
-    }
-
-    .broken-section.show {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .broken-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #2b1e1e;
-      margin-bottom: 0.5rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .broken-desc {
-      font-size: 0.82rem;
-      color: #666;
-      margin-bottom: 1.5rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .btn-iloveyou {
-      width: 100%;
-      background-color: #ff4d6d;
-      color: white;
-      border: none;
-      padding: 14px;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
-      margin-bottom: 1.5rem;
-      font-family: 'Poppins', sans-serif;
-      transition: transform 0.2s;
-    }
-
-    .btn-iloveyou:hover {
-      transform: scale(1.03);
-    }
-
-    .overload-box {
-      background-color: #fff4f6;
-      border-radius: 12px;
-      padding: 1rem;
-      font-size: 0.8rem;
-      color: #555;
-      text-align: center;
-      line-height: 1.4;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .overload-title {
-      font-weight: 600;
-      color: #d90429;
-      margin-bottom: 4px;
-    }
-
-    /* Buttons & Inputs */
     .btn-group {
       display: flex;
       justify-content: center;
@@ -248,6 +117,7 @@
       position: absolute;
     }
 
+    /* Inputs */
     .input-group {
       display: flex;
       flex-direction: column;
@@ -360,42 +230,7 @@
         I promise to never let you go again
       </p>
 
-      <button onclick="nextScreen('1_25')">okay okay! ➔</button>
-    </div>
-
-    <!-- SCREEN 1.25: AUTOMATED FORGIVENESS METER -->
-    <div id="screen1_25" class="screen">
-      <div class="meter-card-inner">
-        <div class="sub-tag">✦ Completely Scientific ✦</div>
-        <h2 class="meter-title">The Forgiveness Meter™</h2>
-        <p class="meter-description">
-          Advanced AI is calculating exactly how much you deserve to be forgiven right now...
-        </p>
-
-        <!-- Dynamic Counter Output -->
-        <div class="percentage-display" id="meterValue">0%</div>
-
-        <!-- Dynamic Status Subtitle -->
-        <div class="status-text" id="statusText">Scanning emotional wavelengths...</div>
-
-        <!-- Error Banner (Hidden Initially) -->
-        <div id="errorBanner" style="display: none;">
-          <div class="error-banner">⚡ Error: Too much love detected</div>
-        </div>
-
-        <!-- Hidden Section Revealed After Meter Breaks -->
-        <div class="broken-section" id="brokenSection">
-          <h3 class="broken-title">Cuteness Meter Broken</h3>
-          <p class="broken-desc">You are officially 120% more cute than anyone else in the universe.</p>
-
-          <button class="btn-iloveyou" onclick="nextScreen('1_75')">I LOVE YOU 💖</button>
-
-          <div class="overload-box">
-            <div class="overload-title">System Overload 💫</div>
-            Too much beauty detected. The universe cannot process this much cuteness.
-          </div>
-        </div>
-      </div>
+      <button onclick="nextScreen('1_75')">okay okay! ➔</button>
     </div>
 
     <!-- SCREEN 1.75: LOVE LETTER SCREEN -->
@@ -472,14 +307,11 @@
   <script>
     // State Tracking
     const bookingData = {
-      forgiveness: '120% (Meter Broken 💕)',
       date: '',
       time: '',
       food: '',
       location: ''
     };
-
-    let hasScannedMeter = false;
 
     // Set Minimum Date to Today on Load
     window.addEventListener('DOMContentLoaded', () => {
@@ -491,13 +323,7 @@
     // Screen Switcher
     function nextScreen(screenNumber) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      const nextScr = document.getElementById(`screen${screenNumber}`);
-      nextScr.classList.add('active');
-
-      // Trigger automatic meter scan when Screen 1.25 becomes active
-      if (screenNumber === '1_25' && !hasScannedMeter) {
-        startMeterScan();
-      }
+      document.getElementById(`screen${screenNumber}`).classList.add('active');
     }
 
     // Moving "No" Button Logic
@@ -506,36 +332,6 @@
       const x = Math.random() * (window.innerWidth - 100) - (window.innerWidth / 2 - 50);
       const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2 - 50);
       btn.style.transform = `translate(${x}px, ${y}px)`;
-    }
-
-    // Automated Forgiveness Meter Logic
-    function startMeterScan() {
-      hasScannedMeter = true;
-
-      const meterValue = document.getElementById("meterValue");
-      const statusText = document.getElementById("statusText");
-      const errorBanner = document.getElementById("errorBanner");
-      const brokenSection = document.getElementById("brokenSection");
-
-      let currentVal = 0;
-      const targetVal = 81; // Scans up to 81%
-
-      const scanInterval = setInterval(() => {
-        currentVal += 3;
-        if (currentVal <= targetVal) {
-          meterValue.textContent = currentVal + "%";
-        } else {
-          clearInterval(scanInterval);
-          
-          // Trigger the broken meter transition
-          setTimeout(() => {
-            meterValue.textContent = "???%";
-            statusText.style.display = "none";
-            errorBanner.style.display = "block";
-            brokenSection.classList.add("show");
-          }, 600);
-        }
-      }, 50);
     }
 
     // Save Date/Time
@@ -586,7 +382,7 @@
     // Display Summary on Screen 5
     function renderSummary() {
       const summary = document.getElementById('summaryText');
-      summary.innerHTML = `Forgiveness Level: <b>${bookingData.forgiveness}</b><br>See you on <b>${bookingData.date}</b> at <b>${bookingData.time}</b>.<br>We're having: <b>${bookingData.food}</b><br>At: <b>${bookingData.location}</b>!`;
+      summary.innerHTML = `See you on <b>${bookingData.date}</b> at <b>${bookingData.time}</b>.<br>We're having: <b>${bookingData.food}</b><br>At: <b>${bookingData.location}</b>!`;
     }
 
     // Hook Screen 5 Transition
@@ -612,7 +408,6 @@
           },
           body: JSON.stringify({
             message: "Kesh said YES to the date proposal!",
-            forgivenessLevel: bookingData.forgiveness,
             date: bookingData.date,
             time: bookingData.time,
             food: bookingData.food,
