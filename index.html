@@ -244,21 +244,23 @@
         I promise to never let you go again
       </p>
 
-      <button onclick="nextScreen(1.75)">okay okay! ➔</button>
+      <button onclick="nextScreen('letter')">okay okay! ➔</button>
     </div>
 
-    <!-- SCREEN 1.75: LOVE LETTER -->
-<div id="screen1_75" class="screen">
+    <!-- SCREEN LOVE LETTER -->
+<div id="screen_letter" class="screen">
   <div class="letter-box">
     <div class="letter-stamp">💌</div>
-    <h3 style="font-family: 'Playfair Display', serif; color: #d63384; margin-bottom: 15px;">
-      A quick note for you, Kesh...
-    </h3>
+    <h3 style="font-family: 'Playfair Display', serif; color: #ff4d6d; margin-bottom: 12px;">A quick note for you, Kesh...</h3>
     <div class="letter-body">
       <p>I know things haven't always been simple, but making you happy is something that has always mattered to me.</p>
       <p>I wanted to create something special just for you to show how much this opportunity means to me. Thank you for giving us another shot.</p>
-      <p style="font-style: italic; margin-top: 15px;">Now... let's plan our perfect date! ✨</p>
+      <p style="font-style: italic; text-align: center; color: #ff4d6d; margin-top: 10px;">Now... let's plan our date! ✨</p>
     </div>
+  </div>
+
+  <button onclick="nextScreen(2)">Let's plan it! ➔</button>
+</div>
   </div>
 
   <button onclick="nextScreen(2)" style="margin-top: 20px;">Let's plan it! ➔</button>
@@ -334,10 +336,24 @@
     });
 
     // Screen Switcher
-    function nextScreen(screenNumber) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById(`screen${screenNumber}`).classList.add('active');
-    }
+    function nextScreen(screenIdentifier) {
+  // Hide all screens
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+
+  // Determine target ID
+  let targetId = typeof screenIdentifier === 'string' && screenIdentifier.startsWith('screen')
+    ? screenIdentifier
+    : typeof screenIdentifier === 'string'
+      ? 'screen_' + screenIdentifier
+      : 'screen' + String(screenIdentifier).replace('.', '_');
+
+  let target = document.getElementById(targetId);
+  if (target) {
+    target.classList.add('active');
+  }
+}
 
     // Moving "No" Button Logic
     function moveNoButton() {
