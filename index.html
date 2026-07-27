@@ -40,14 +40,6 @@
       display: block;
     }
 
-    img.gif {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 15px;
-      margin-bottom: 20px;
-    }
-
     h2 {
       color: #5c1d24;
       margin-bottom: 15px;
@@ -83,6 +75,51 @@
       max-height: 250px;
       overflow-y: auto;
       box-shadow: inset 0 0 8px rgba(0,0,0,0.03);
+    }
+
+    /* Forgiveness Meter Styles */
+    .meter-container {
+      background-color: #fff0f5;
+      border: 2px solid #f48fb1;
+      border-radius: 16px;
+      padding: 20px 15px;
+      margin: 20px 0;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 12px;
+      border-radius: 6px;
+      background: #e0e0e0;
+      outline: none;
+      margin: 15px 0;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #e91e63;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .meter-percent {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #e91e63;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .meter-status {
+      font-size: 0.95rem;
+      color: #5c1d24;
+      margin-top: 8px;
+      min-height: 40px;
+      font-style: italic;
     }
 
     .btn-group {
@@ -206,9 +243,24 @@
       </div>
 
       <div class="btn-group">
-        <button onclick="nextScreen('1_5')">YES! 💕</button>
+        <button onclick="nextScreen('1_25')">YES! 💕</button>
         <button id="no-btn" onmouseover="moveNoButton()">no... 🙈</button>
       </div>
+    </div>
+
+    <!-- SCREEN 1.25: FORGIVENESS METER -->
+    <div id="screen1_25" class="screen">
+      <h2>The Forgiveness Meter 🥺</h2>
+      <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Be honest, how much have you forgiven me?</p>
+      
+      <div class="meter-container">
+        <div id="emojiDisplay" style="font-size: 60px; margin-bottom: 10px;">😐</div>
+        <div class="meter-percent" id="meterValue">50%</div>
+        <input type="range" min="0" max="100" value="50" class="slider" id="forgivenessSlider" oninput="updateMeter(this.value)">
+        <div class="meter-status" id="meterStatus">"I'm willing to listen..."</div>
+      </div>
+
+      <button onclick="confirmForgiveness()">Continue ➔</button>
     </div>
 
     <!-- SCREEN 1.5: SURPRISE / YAY SCREEN -->
@@ -307,6 +359,7 @@
   <script>
     // State Tracking
     const bookingData = {
+      forgiveness: '50%',
       date: '',
       time: '',
       food: '',
@@ -332,6 +385,38 @@
       const x = Math.random() * (window.innerWidth - 100) - (window.innerWidth / 2 - 50);
       const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2 - 50);
       btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // Forgiveness Meter Logic
+    function updateMeter(val) {
+      const value = parseInt(val);
+      document.getElementById('meterValue').innerText = `${value}%`;
+      
+      const emojiDisplay = document.getElementById('emojiDisplay');
+      const meterStatus = document.getElementById('meterStatus');
+
+      if (value < 20) {
+        emojiDisplay.innerText = "😠";
+        meterStatus.innerText = '"Still pretty mad at you... Work hard for it!"';
+      } else if (value < 40) {
+        emojiDisplay.innerText = "😒";
+        meterStatus.innerText = '"I\'m skeptical, but go on..."';
+      } else if (value < 60) {
+        emojiDisplay.innerText = "😐";
+        meterStatus.innerText = '"I\'m willing to listen..."';
+      } else if (value < 80) {
+        emojiDisplay.innerText = "😊";
+        meterStatus.innerText = '"Getting warmer! Looking forward to this."';
+      } else {
+        emojiDisplay.innerText = "🥰";
+        meterStatus.innerText = '"All forgiven! Let\'s build something special."';
+      }
+    }
+
+    function confirmForgiveness() {
+      const val = document.getElementById('forgivenessSlider').value;
+      bookingData.forgiveness = `${val}%`;
+      nextScreen('1_5');
     }
 
     // Save Date/Time
@@ -382,7 +467,7 @@
     // Display Summary on Screen 5
     function renderSummary() {
       const summary = document.getElementById('summaryText');
-      summary.innerHTML = `See you on <b>${bookingData.date}</b> at <b>${bookingData.time}</b>.<br>We're having: <b>${bookingData.food}</b><br>At: <b>${bookingData.location}</b>!`;
+      summary.innerHTML = `Forgiveness Level: <b>${bookingData.forgiveness}</b><br>See you on <b>${bookingData.date}</b> at <b>${bookingData.time}</b>.<br>We're having: <b>${bookingData.food}</b><br>At: <b>${bookingData.location}</b>!`;
     }
 
     // Hook Screen 5 Transition
@@ -408,6 +493,7 @@
           },
           body: JSON.stringify({
             message: "Kesh said YES to the date proposal!",
+            forgivenessLevel: bookingData.forgiveness,
             date: bookingData.date,
             time: bookingData.time,
             food: bookingData.food,
