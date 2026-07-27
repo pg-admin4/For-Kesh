@@ -75,36 +75,6 @@
             font-style: italic;
         }
 
-        /* Love Letter Styling */
-        .letter-box {
-            background: #ffffff;
-            border: 2px dashed #f48fb1;
-            border-radius: 16px;
-            padding: 22px 18px;
-            margin: 15px 0;
-            position: relative;
-            text-align: left;
-        }
-
-        .letter-stamp {
-            font-size: 28px;
-            position: absolute;
-            top: -18px;
-            right: 15px;
-            background: #fff;
-            padding: 2px 6px;
-            border-radius: 50%;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .letter-body p {
-            color: #4a1525;
-            font-size: 0.92rem;
-            line-height: 1.6;
-            margin-bottom: 12px;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
-
         .btn-group {
             display: flex;
             justify-content: center;
@@ -228,22 +198,7 @@
             <h2>WAIT YOU ACTUALLY SAID YES?? 😭</h2>
             <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px; font-family: 'Segoe UI', sans-serif;">I promise to never let you go again.</p>
             
-            <button onclick="nextScreen('letter')">okay okay! ➔</button>
-        </div>
-
-        <!-- SCREEN 1.75: LOVE LETTER -->
-        <div id="screen_letter" class="screen">
-            <div class="letter-box">
-                <div class="letter-stamp">💌</div>
-                <h3 style="color: #e91e63; margin-bottom: 12px; font-size: 1.2rem;">A quick note for you, Kesh...</h3>
-                <div class="letter-body">
-                    <p>I know things haven't always been simple, but making you happy is something that has always mattered to me.</p>
-                    <p>I wanted to create something special just for you to show how much this opportunity means to me. Thank you for giving us another shot.</p>
-                    <p style="font-style: italic; text-align: center; color: #e91e63; margin-top: 10px; font-weight: bold;">Now... let's plan our date! ✨</p>
-                </div>
-            </div>
-
-            <button onclick="nextScreen(2)">Let's plan it! ➔</button>
+            <button onclick="nextScreen(2)">okay okay! ➔</button>
         </div>
 
         <!-- SCREEN 2: DATE & TIME PICKER -->
