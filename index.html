@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Kesh 💌</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -77,51 +83,139 @@
       box-shadow: inset 0 0 8px rgba(0,0,0,0.03);
     }
 
-    /* Forgiveness Meter Styles */
-    .meter-container {
-      background-color: #fff0f5;
-      border: 2px solid #f48fb1;
-      border-radius: 16px;
-      padding: 20px 15px;
-      margin: 20px 0;
+    /* Automated Forgiveness Meter Styles */
+    .meter-card-inner {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1rem 0.5rem;
+      text-align: center;
     }
 
-    .slider {
-      -webkit-appearance: none;
+    .sub-tag {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 0.5rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .meter-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2b1e1e;
+      margin-bottom: 0.8rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .meter-description {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .percentage-display {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #2b1e1e;
+      margin-bottom: 0.8rem;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .status-text {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1.5rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .error-banner {
+      display: inline-block;
+      background-color: #fce8e6;
+      color: #d90429;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .broken-section {
+      display: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .broken-section.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .broken-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2b1e1e;
+      margin-bottom: 0.5rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .broken-desc {
+      font-size: 0.82rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-iloveyou {
       width: 100%;
-      height: 12px;
-      border-radius: 6px;
-      background: #e0e0e0;
-      outline: none;
-      margin: 15px 0;
-    }
-
-    .slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: #e91e63;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .meter-percent {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #e91e63;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    .meter-status {
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
       font-size: 0.95rem;
-      color: #5c1d24;
-      margin-top: 8px;
-      min-height: 40px;
-      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+      margin-bottom: 1.5rem;
+      font-family: 'Poppins', sans-serif;
+      transition: transform 0.2s;
     }
 
+    .btn-iloveyou:hover {
+      transform: scale(1.03);
+    }
+
+    .overload-box {
+      background-color: #fff4f6;
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #555;
+      text-align: center;
+      line-height: 1.4;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .overload-title {
+      font-weight: 600;
+      color: #d90429;
+      margin-bottom: 4px;
+    }
+
+    /* Buttons & Inputs */
     .btn-group {
       display: flex;
       justify-content: center;
@@ -154,7 +248,6 @@
       position: absolute;
     }
 
-    /* Inputs */
     .input-group {
       display: flex;
       flex-direction: column;
@@ -270,19 +363,39 @@
       <button onclick="nextScreen('1_25')">okay okay! ➔</button>
     </div>
 
-    <!-- SCREEN 1.25: FORGIVENESS METER -->
+    <!-- SCREEN 1.25: AUTOMATED FORGIVENESS METER -->
     <div id="screen1_25" class="screen">
-      <h2>The Forgiveness Meter 🥺</h2>
-      <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Be honest, how much have you forgiven me?</p>
-      
-      <div class="meter-container">
-        <div id="emojiDisplay" style="font-size: 60px; margin-bottom: 10px;">😐</div>
-        <div class="meter-percent" id="meterValue">50%</div>
-        <input type="range" min="0" max="100" value="50" class="slider" id="forgivenessSlider" oninput="updateMeter(this.value)">
-        <div class="meter-status" id="meterStatus">"I'm willing to listen..."</div>
-      </div>
+      <div class="meter-card-inner">
+        <div class="sub-tag">✦ Completely Scientific ✦</div>
+        <h2 class="meter-title">The Forgiveness Meter™</h2>
+        <p class="meter-description">
+          Advanced AI is calculating exactly how much you deserve to be forgiven right now...
+        </p>
 
-      <button onclick="confirmForgiveness()">Continue ➔</button>
+        <!-- Dynamic Counter Output -->
+        <div class="percentage-display" id="meterValue">0%</div>
+
+        <!-- Dynamic Status Subtitle -->
+        <div class="status-text" id="statusText">Scanning emotional wavelengths...</div>
+
+        <!-- Error Banner (Hidden Initially) -->
+        <div id="errorBanner" style="display: none;">
+          <div class="error-banner">⚡ Error: Too much love detected</div>
+        </div>
+
+        <!-- Hidden Section Revealed After Meter Breaks -->
+        <div class="broken-section" id="brokenSection">
+          <h3 class="broken-title">Cuteness Meter Broken</h3>
+          <p class="broken-desc">You are officially 120% more cute than anyone else in the universe.</p>
+
+          <button class="btn-iloveyou" onclick="nextScreen('1_75')">I LOVE YOU 💖</button>
+
+          <div class="overload-box">
+            <div class="overload-title">System Overload 💫</div>
+            Too much beauty detected. The universe cannot process this much cuteness.
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- SCREEN 1.75: LOVE LETTER SCREEN -->
@@ -359,12 +472,14 @@
   <script>
     // State Tracking
     const bookingData = {
-      forgiveness: '50%',
+      forgiveness: '120% (Meter Broken 💕)',
       date: '',
       time: '',
       food: '',
       location: ''
     };
+
+    let hasScannedMeter = false;
 
     // Set Minimum Date to Today on Load
     window.addEventListener('DOMContentLoaded', () => {
@@ -376,7 +491,13 @@
     // Screen Switcher
     function nextScreen(screenNumber) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById(`screen${screenNumber}`).classList.add('active');
+      const nextScr = document.getElementById(`screen${screenNumber}`);
+      nextScr.classList.add('active');
+
+      // Trigger automatic meter scan when Screen 1.25 becomes active
+      if (screenNumber === '1_25' && !hasScannedMeter) {
+        startMeterScan();
+      }
     }
 
     // Moving "No" Button Logic
@@ -387,36 +508,34 @@
       btn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    // Forgiveness Meter Logic
-    function updateMeter(val) {
-      const value = parseInt(val);
-      document.getElementById('meterValue').innerText = `${value}%`;
-      
-      const emojiDisplay = document.getElementById('emojiDisplay');
-      const meterStatus = document.getElementById('meterStatus');
+    // Automated Forgiveness Meter Logic
+    function startMeterScan() {
+      hasScannedMeter = true;
 
-      if (value < 20) {
-        emojiDisplay.innerText = "😠";
-        meterStatus.innerText = '"Still pretty mad at you... Work hard for it!"';
-      } else if (value < 40) {
-        emojiDisplay.innerText = "😒";
-        meterStatus.innerText = '"I\'m skeptical, but go on..."';
-      } else if (value < 60) {
-        emojiDisplay.innerText = "😐";
-        meterStatus.innerText = '"I\'m willing to listen..."';
-      } else if (value < 80) {
-        emojiDisplay.innerText = "😊";
-        meterStatus.innerText = '"Getting warmer! Looking forward to this."';
-      } else {
-        emojiDisplay.innerText = "🥰";
-        meterStatus.innerText = '"All forgiven! Let\'s build something special."';
-      }
-    }
+      const meterValue = document.getElementById("meterValue");
+      const statusText = document.getElementById("statusText");
+      const errorBanner = document.getElementById("errorBanner");
+      const brokenSection = document.getElementById("brokenSection");
 
-    function confirmForgiveness() {
-      const val = document.getElementById('forgivenessSlider').value;
-      bookingData.forgiveness = `${val}%`;
-      nextScreen('1_75');
+      let currentVal = 0;
+      const targetVal = 81; // Scans up to 81%
+
+      const scanInterval = setInterval(() => {
+        currentVal += 3;
+        if (currentVal <= targetVal) {
+          meterValue.textContent = currentVal + "%";
+        } else {
+          clearInterval(scanInterval);
+          
+          // Trigger the broken meter transition
+          setTimeout(() => {
+            meterValue.textContent = "???%";
+            statusText.style.display = "none";
+            errorBanner.style.display = "block";
+            brokenSection.classList.add("show");
+          }, 600);
+        }
+      }, 50);
     }
 
     // Save Date/Time
