@@ -243,24 +243,9 @@
       </div>
 
       <div class="btn-group">
-        <button onclick="nextScreen('1_25')">YES! 💕</button>
+        <button onclick="nextScreen('1_5')">YES! 💕</button>
         <button id="no-btn" onmouseover="moveNoButton()">no... 🙈</button>
       </div>
-    </div>
-
-    <!-- SCREEN 1.25: FORGIVENESS METER -->
-    <div id="screen1_25" class="screen">
-      <h2>The Forgiveness Meter 🥺</h2>
-      <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Be honest, how much have you forgiven me?</p>
-      
-      <div class="meter-container">
-        <div id="emojiDisplay" style="font-size: 60px; margin-bottom: 10px;">😐</div>
-        <div class="meter-percent" id="meterValue">50%</div>
-        <input type="range" min="0" max="100" value="50" class="slider" id="forgivenessSlider" oninput="updateMeter(this.value)">
-        <div class="meter-status" id="meterStatus">"I'm willing to listen..."</div>
-      </div>
-
-      <button onclick="confirmForgiveness()">Continue ➔</button>
     </div>
 
     <!-- SCREEN 1.5: SURPRISE / YAY SCREEN -->
@@ -282,7 +267,22 @@
         I promise to never let you go again
       </p>
 
-      <button onclick="nextScreen('1_75')">okay okay! ➔</button>
+      <button onclick="nextScreen('1_25')">okay okay! ➔</button>
+    </div>
+
+    <!-- SCREEN 1.25: FORGIVENESS METER -->
+    <div id="screen1_25" class="screen">
+      <h2>The Forgiveness Meter 🥺</h2>
+      <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Be honest, how much have you forgiven me?</p>
+      
+      <div class="meter-container">
+        <div id="emojiDisplay" style="font-size: 60px; margin-bottom: 10px;">😐</div>
+        <div class="meter-percent" id="meterValue">50%</div>
+        <input type="range" min="0" max="100" value="50" class="slider" id="forgivenessSlider" oninput="updateMeter(this.value)">
+        <div class="meter-status" id="meterStatus">"I'm willing to listen..."</div>
+      </div>
+
+      <button onclick="confirmForgiveness()">Continue ➔</button>
     </div>
 
     <!-- SCREEN 1.75: LOVE LETTER SCREEN -->
@@ -416,7 +416,7 @@
     function confirmForgiveness() {
       const val = document.getElementById('forgivenessSlider').value;
       bookingData.forgiveness = `${val}%`;
-      nextScreen('1_5');
+      nextScreen('1_75');
     }
 
     // Save Date/Time
