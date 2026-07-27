@@ -163,6 +163,37 @@
       margin-top: 12px;
       letter-spacing: 4px;
     }
+
+
+    .letter-box {
+  background: #ffffff;
+  border: 2px dashed #f8c8dc;
+  border-radius: 16px;
+  padding: 25px 20px;
+  max-width: 90%;
+  margin: 0 auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.letter-stamp {
+  font-size: 35px;
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  background: #fff;
+  padding: 2px 8px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.letter-body p {
+  color: #4a4a4a;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  text-align: left;
+}
   </style>
 </head>
 <body>
@@ -216,6 +247,23 @@
 
       <button onclick="nextScreen(2)">okay okay! ➔</button>
     </div>
+
+    <!-- SCREEN 1.75: LOVE LETTER -->
+<div id="screen_letter" class="screen">
+  <div class="letter-box">
+    <div class="letter-stamp">💌</div>
+    <h3 style="font-family: 'Playfair Display', serif; color: #d63384; margin-bottom: 15px;">
+      A quick note for you, Kesh...
+    </h3>
+    <div class="letter-body">
+      <p>I know things haven't always been simple, but making you happy is something that has always mattered to me.</p>
+      <p>I wanted to create something special just for you to show how much this opportunity means to me. Thank you for giving us another shot.</p>
+      <p style="font-style: italic; margin-top: 15px;">Now... let's plan our perfect date! ✨</p>
+    </div>
+  </div>
+
+  <button onclick="nextScreen(2)" style="margin-top: 20px;">Let's plan it! ➔</button>
+</div>
 
     <!-- SCREEN 2: DATE & TIME PICKER -->
     <div id="screen2" class="screen">
