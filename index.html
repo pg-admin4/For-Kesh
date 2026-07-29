@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Kesh 💌</title>
+  <title>FLOWERS FOR YOU 💌</title>
   <style>
     * {
       box-sizing: border-box;
@@ -13,14 +13,29 @@
     }
 
     body {
-      background-color: #fce4ec;
+      background-color: #0b0d13;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      overflow: hidden;
+      position: relative;
+      transition: background-color 0.8s ease;
     }
 
+    /* Screen 0 Background Grid */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 0.8s ease;
+    }
+
+    /* Card Wrapper */
     .card {
       background: #ffffff;
       padding: 35px 25px;
@@ -30,16 +45,97 @@
       max-width: 420px;
       width: 100%;
       position: relative;
+      z-index: 2;
     }
 
+    /* Screen Management & Transitions */
     .screen {
       display: none;
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
     .screen.active {
       display: block;
+      opacity: 1;
     }
 
+    /* Screen 0 Container & Animations */
+    #screen0 {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      z-index: 2;
+    }
+
+    #screen0.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .glowing-title {
+      color: #ffffff;
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.6),
+        0 0 35px rgba(255, 255, 200, 0.4);
+      animation: fadeInText 2s ease-in-out forwards;
+      text-align: center;
+      padding-left: 0.35em;
+    }
+
+    .open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 10px 24px;
+      border-radius: 9999px;
+      color: #f1f5f9;
+      font-size: 0.95rem;
+      font-family: inherit;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .open-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .open-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    @keyframes fadeInText {
+      0% {
+        opacity: 0;
+        filter: blur(8px);
+        letter-spacing: 0.6em;
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0px);
+        letter-spacing: 0.35em;
+      }
+    }
+
+    /* Remaining Styles */
     img.gif {
       width: 180px;
       height: 180px;
@@ -69,7 +165,6 @@
       font-style: italic;
     }
 
-    /* Love Letter Container */
     .love-letter-box {
       background-color: #fffaf0;
       border: 1px dashed #f48fb1;
@@ -117,7 +212,6 @@
       position: absolute;
     }
 
-    /* Inputs */
     .input-group {
       display: flex;
       flex-direction: column;
@@ -134,7 +228,6 @@
       font-family: 'Segoe UI', Tahoma, sans-serif;
     }
 
-    /* Choice Grids (Food & Location) */
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -163,7 +256,6 @@
       border-color: #e91e63;
     }
 
-    /* Aesthetic Details */
     .ps-note {
       font-style: italic;
       font-size: 0.9rem;
@@ -183,8 +275,23 @@
 </head>
 <body>
 
-  <div class="card">
-    
+  <!-- Background Grid for Intro -->
+  <div class="bg-grid" id="bgGrid"></div>
+
+  <!-- SCREEN 0: INTRO SCREEN -->
+  <div id="screen0" class="active">
+    <h1 class="glowing-title">I Have Something</h1>
+    <button class="open-btn" onclick="openProposal()">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+      </svg>
+      <span>Open</span>
+    </button>
+  </div>
+
+  <!-- CARD CONTAINER (HIDDEN INITIALLY) -->
+  <div class="card" id="mainCard" style="display: none;">
+
     <!-- SCREEN 1: THE PROPOSAL & HEARTFELT MESSAGE -->
     <div id="screen1" class="screen active">
       <div style="font-size: 70px; margin-bottom: 10px; animation: dance 1s infinite alternate; display: inline-block;">
@@ -312,6 +419,28 @@
       food: '',
       location: ''
     };
+
+    // Transition from Screen 0 to Screen 1
+    function openProposal() {
+      const screen0 = document.getElementById('screen0');
+      const bgGrid = document.getElementById('bgGrid');
+      const card = document.getElementById('mainCard');
+
+      screen0.style.opacity = '0';
+      bgGrid.style.opacity = '0';
+
+      setTimeout(() => {
+        screen0.style.display = 'none';
+        bgGrid.style.display = 'none';
+        document.body.style.backgroundColor = '#fce4ec';
+        document.body.style.overflow = 'auto';
+
+        card.style.display = 'block';
+        setTimeout(() => {
+          card.style.opacity = '1';
+        }, 50);
+      }, 600);
+    }
 
     // Set Minimum Date to Today on Load
     window.addEventListener('DOMContentLoaded', () => {
